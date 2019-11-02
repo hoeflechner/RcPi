@@ -3,6 +3,9 @@
 from flask import Flask, jsonify, request 
 from flask_restful import Resource, Api 
 from flask_cors import CORS, cross_origin
+import json
+with open('backend/config.json') as json_file:
+    config = json.load(json_file)
 
 # creating the flask app 
 app = Flask(__name__) 
@@ -37,13 +40,19 @@ class Square(Resource):
   
         return jsonify({'square': num**2}) 
   
+class Config(Resource):
+
+    def get(self):
+        return jsonify({'config': config})
+
 
 # adding the defined resources along with their corresponding urls 
 api.add_resource(Hello, '/') 
 api.add_resource(Square, '/square/<int:num>') 
+api.add_resource(Config,'/config')
   
   
-# driver function 
+# driver function
 if __name__ == '__main__': 
   
     app.run(debug = True, host= '0.0.0.0')

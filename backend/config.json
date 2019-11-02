@@ -1,0 +1,4 @@
+[
+   {"Port": 1, "Name": "throttle", "Axis": "X"}, 
+   {"Port": 2, "Name": "steering", "Axis": "Y"}
+]
