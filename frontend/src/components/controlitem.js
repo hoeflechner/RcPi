@@ -1,28 +1,50 @@
-import React,{useState} from 'react';
-import Global from '../global';
+import React from 'react';
+import { Store } from './store';
 
-function ControlItem(props){
-    console.log("item"+ props.id);
-    console.log(Global.Config);
-    const [name, setName] = useState(Global.Config[props.id].Name)
-    const [axis, setAxis] = useState(Global.Config[props.id].Axis)
+function ControlItem(props) {
+    const { state, dispatch } = React.useContext(Store);
+    const [config, setConfig] = React.useState(state.config);
+    //const [name, setName] = useState(state.config[props.id].Name);
+    //const [axis, setAxis] = useState(state.config[props.id].Axis);
 
-    function handleNameChange(e){
-        setName(e.target.value);
-        // console.log("change name item"+ props.id+" to "+e.target.value);
-        // console.log(Global.Config); 
-        Global.Config[props.id].Name=name;
+    function handleNameChange(e) {
+        let c = JSON.parse(JSON.stringify(state.config));
+
+        c[props.id].Name = e.target.value;
+
+        setConfig(c);
+        console.log((config === state.config));
     }
 
-    function handleAxisChange(e){
-        setAxis(e.target.value);
-        Global.Config[props.id].Axis=axis
+    function handleAxisChange(e) {
+        let c = JSON.parse(JSON.stringify(state.config));
+
+        c[props.id].Axis = e.target.value;
+
+        setConfig(c);
+        console.log((config === state.config));
     }
 
+    function updateStore() {
+        return dispatch({
+            type: 'UPDATE',
+            payload: config
+        });
+    };
+
+    React.useEffect(() => {
+        console.log(config);
+        console.log(state.config);
+        if (config !== state.config) {
+            updateStore();
+        }
+    }, config);
+
+    console.log("render item " + props.id + " ");
     return (
         <div>
-            <input value={name} onChange={handleNameChange}/>
-            <input value={axis} onChange={handleAxisChange}/>
+            <input defaultValue={state.config[props.id].Name} onChange={handleNameChange} />
+            <input defaultValue={state.config[props.id].Axis} onChange={handleAxisChange} />
         </div>
     )
 }

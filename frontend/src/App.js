@@ -1,39 +1,43 @@
 import React, { Component } from 'react';
 import Config from './components/config';
-import Global from './global';
+import ConfigJson from './components/configjson';
+import { Store } from './components/store'
 
-Global.Config = [{
-  "Axis": "X",
-  "Name": "throttle",
-  "Port": 1
-},
-{
-  "Axis": "Y",
-  "Name": "steering",
-  "Port": 2
-}
-];
+function App() {
+  const { state, dispatch } = React.useContext(Store);
 
-class App extends Component {
+  function componentDidMount() {
+    this.update();
 
-  componentDidMount() {
     fetch('http://10.10.0.3:5000/config')
       .then(res => res.json())
       .then((data) => {
 
         //this.setState(data);
-        Global.Config = data;
+       
 
       })
       .catch(console.log);
+  }
 
-  }
-  render() {
-    console.log(Global.Config);
-    return (
+  // update() {
+  //   var key=0;
+  //   try{key=this.state.key;}
+  //   catch{}
+  //   key++;
+  //   this.setState({ key: key });
+  //   console.log("update key "+key)
+  // }
+
+  console.log("render App ");
+  
+  return (
+    <React.Fragment>
       <Config />
-    );
-  }
+      <ConfigJson />
+    </React.Fragment>
+  );
+
 }
 
 export default App;

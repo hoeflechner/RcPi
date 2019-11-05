@@ -1,15 +1,13 @@
 import React from 'react';
 import ControlItem from './controlitem';
 import Global from '../global';
+import {Store} from './store';
 
-function Config() {
-    console.log("Config:")
-    console.log(Global.Config);
-
+function Config(props) {
+    const { state, dispatch } = React.useContext(Store);
     return (
         <div>
-            <center><h1>Config</h1></center>
-            {Global.Config.map((c, index) => (
+            {state.config.map((c, index) => (
                 <li key={index} >
                     Control Item:
                     <ControlItem id={index}/>
