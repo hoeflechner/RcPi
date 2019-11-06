@@ -4,16 +4,17 @@ var hooks = new Set();
 export default function Store(p) {
   const [data, setData] = p;
   if (null == globalstore) {
-    globalstore = JSON.parse(JSON.stringify(data));
+    globalstore = JSON.stringify(data);
   }
   hooks.add(setData);
+  console.log("store: " + globalstore);
   console.log("hooks size: " + hooks.size);
   return [
-    globalstore,
+    JSON.parse(globalstore),
     d => {
-      globalstore = JSON.parse(JSON.stringify(d));
+      globalstore = JSON.stringify(d);
       [...hooks].map(sd => {
-        sd(JSON.parse(JSON.stringify(d)));
+        sd(JSON.parse(globalstore));
       });
     }
   ];
