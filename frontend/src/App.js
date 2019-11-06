@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Config from './components/config';
-import ConfigJson from './components/configjson';
-import { Store } from './components/store'
+import React, { Component } from "react";
+import Config from "./components/config";
+import ConfigJson from "./components/configjson";
+import { Store } from "./components/store";
 
 function App() {
   const { state, dispatch } = React.useContext(Store);
@@ -9,13 +9,10 @@ function App() {
   function componentDidMount() {
     this.update();
 
-    fetch('http://10.10.0.3:5000/config')
+    fetch("http://10.10.0.3:5000/config")
       .then(res => res.json())
-      .then((data) => {
-
+      .then(data => {
         //this.setState(data);
-       
-
       })
       .catch(console.log);
   }
@@ -30,14 +27,13 @@ function App() {
   // }
 
   console.log("render App ");
-  
+
   return (
     <React.Fragment>
       <Config />
       <ConfigJson />
     </React.Fragment>
   );
-
 }
 
 export default App;
