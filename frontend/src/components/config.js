@@ -1,10 +1,10 @@
 import React from "react";
 import ControlItem from "./controlitem";
-import initialstate from "../global";
-import LatchStore from "./latchstore";
+import initialState from "../global";
+import Store from "./store";
 
 function Config(props) {
-  const [config, setConfig] = LatchStore(React.useState(initialstate));
+  const [config, setConfig] = Store(React.useState(initialState));
   console.log(config);
   return (
     <div>

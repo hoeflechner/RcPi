@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import LatchStore from "./latchstore";
-import initialstate from "../global";
+import Store from "./store";
+import initialState from "../global";
 
 function ConfigJson(props) {
-  const [config, setConfig] = LatchStore(React.useState(initialstate));
+  const [config, setConfig] = Store(useState(initialState));
 
   console.log("render json");
   return (
