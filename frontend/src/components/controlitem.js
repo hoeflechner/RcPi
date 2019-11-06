@@ -1,56 +1,29 @@
 import React from "react";
-import { Store } from "./store";
+import LatchStore, { globalstore } from "./latchstore";
+import initialstate from "../global";
 
 function ControlItem(props) {
-  const { state, dispatch } = React.useContext(Store);
-  const [config, setConfig] = React.useState(state.config);
+  //const { state, dispatch } = React.useContext(Store);
+  const [config, setConfig] = LatchStore(React.useState(initialstate));
   //const [name, setName] = useState(state.config[props.id].Name);
   //const [axis, setAxis] = useState(state.config[props.id].Axis);
 
   function handleNameChange(e) {
-    let c = JSON.parse(JSON.stringify(state.config));
-
-    c[props.id].Name = e.target.value;
-
-    setConfig(c);
-    console.log(config === state.config);
+    (config[props.id].Name = e.target.value);
+    setConfig(config);
   }
 
   function handleAxisChange(e) {
-    let c = JSON.parse(JSON.stringify(state.config));
-
-    c[props.id].Axis = e.target.value;
-
-    setConfig(c);
-    console.log(config === state.config);
+    (config[props.id].Axis = e.target.value);
+    setConfig(config);
   }
-
-  function updateStore() {
-    return dispatch({
-      type: "UPDATE",
-      payload: config
-    });
-  }
-
-  React.useEffect(() => {
-    console.log(config);
-    console.log(state.config);
-    if (config !== state.config) {
-      updateStore();
-    }
-  }, config);
 
   console.log("render item " + props.id + " ");
+  console.log(globalstore);
   return (
     <div>
-      <input
-        defaultValue={state.config[props.id].Name}
-        onChange={handleNameChange}
-      />
-      <input
-        defaultValue={state.config[props.id].Axis}
-        onChange={handleAxisChange}
-      />
+      <input defaultValue={config[props.id].Name} onChange={handleNameChange} />
+      <input defaultValue={config[props.id].Axis} onChange={handleAxisChange} />
     </div>
   );
 }

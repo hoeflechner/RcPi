@@ -1,13 +1,14 @@
 import React from "react";
 import ControlItem from "./controlitem";
-import Global from "../global";
-import { Store } from "./store";
+import initialstate from "../global";
+import LatchStore from "./latchstore";
 
 function Config(props) {
-  const { state, dispatch } = React.useContext(Store);
+  const [config, setConfig] = LatchStore(React.useState(initialstate));
+  console.log(config);
   return (
     <div>
-      {state.config.map((c, index) => (
+      {config.map((c, index) => (
         <li key={index}>
           Control Item:
           <ControlItem id={index} />

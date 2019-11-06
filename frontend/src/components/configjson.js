@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { Store } from "./store";
+import LatchStore from "./latchstore";
+import initialstate from "../global";
 
 function ConfigJson(props) {
-  const { state, dispatch } = React.useContext(Store);
+  const [config, setConfig] = LatchStore(React.useState(initialstate));
 
   console.log("render json");
   return (
     <div>
       <pre>
         {" "}
-        <code> {JSON.stringify(state.config, null, 3)} </code>
+        <code> {JSON.stringify(config, null, 3)} </code>
       </pre>
     </div>
   );

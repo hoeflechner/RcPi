@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import Config from "./components/config";
 import ConfigJson from "./components/configjson";
-import { Store } from "./components/store";
 
 function App() {
-  const { state, dispatch } = React.useContext(Store);
-
   function componentDidMount() {
     this.update();
 
