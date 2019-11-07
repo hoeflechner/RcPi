@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import Store from "./store";
-import initialState from "../global";
+import useStorage from "./storage";
 
 function ConfigJson(props) {
-  const [config, setConfig] = Store(useState(initialState));
+  const [config, setConfig] = useStorage();
 
   console.log("render json");
   return (

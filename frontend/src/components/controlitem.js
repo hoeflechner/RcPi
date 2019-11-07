@@ -1,9 +1,8 @@
 import React from "react";
-import Store from "./store";
-import initialState from "../global";
+import useStorage from "./storage";
 
 function ControlItem(props) {
-  const [config, setConfig] = Store(React.useState(initialState));
+  const [config, setConfig] = useStorage();
 
   function handleNameChange(e) {
     (config[props.id].Name = e.target.value);

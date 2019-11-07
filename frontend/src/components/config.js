@@ -1,10 +1,10 @@
 import React from "react";
 import ControlItem from "./controlitem";
 import initialState from "../global";
-import Store from "./store";
+import useStorage from "./storage";
 
 function Config(props) {
-  const [config, setConfig] = Store(React.useState(initialState));
+  const [config, setConfig] = useStorage(initialState);
   console.log(config);
   return (
     <div>
