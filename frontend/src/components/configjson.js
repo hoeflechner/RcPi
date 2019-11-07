@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useStorage from "./storage";
 
 function ConfigJson(props) {
-  const [config, setConfig] = useStorage();
+  const [config, setConfig] = useStorage(props.storage);
 
   console.log("render json");
   return (

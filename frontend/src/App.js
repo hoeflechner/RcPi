@@ -27,8 +27,8 @@ function App() {
 
   return (
     <React.Fragment>
-      <Config />
-      <ConfigJson />
+      <Config storage='config'/>
+      <ConfigJson storage='config'/>
     </React.Fragment>
   );
 }

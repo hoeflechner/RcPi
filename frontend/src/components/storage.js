@@ -1,11 +1,11 @@
 import React from "react";
 
-var globalstore = null;
+var globalstore = {};
 var listeners = new Set();
 
-export default function useStorage(initdata) {
-  if (null == globalstore) {
-    globalstore = JSON.stringify(initdata);
+export default function useStorage(identifier, initdata) {
+  if (!globalstore[identifier]) {
+    globalstore[identifier]=JSON.parse(JSON.stringify(initdata));
   }
   const [data, setData] = React.useState(globalstore);
 
@@ -13,24 +13,25 @@ export default function useStorage(initdata) {
     listeners.add(setData);
   }
   
-  //console.log("store: " + globalstore);
+  console.log(globalstore);
   console.log(listeners.size+ " listeners");
 
   React.useEffect(() => {
-    console.log("effect");
+    //console.log("effect");
     return (function cleanup() {
       listeners.delete(setData);
       console.log("cleanup");
+      console.log(listeners.size+ " listeners");
       setData(globalstore);
     });
   });
 
   return [
-    JSON.parse(globalstore),
+    JSON.parse(JSON.stringify(globalstore[identifier])),
     d => {
-      globalstore = JSON.stringify(d);
+      globalstore[identifier] = JSON.parse(JSON.stringify(d));
       [...listeners].map(sd => {
-        sd(JSON.parse(globalstore));
+        sd(JSON.parse(JSON.stringify(globalstore[identifier])));
       });
     }
   ];

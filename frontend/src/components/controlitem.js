@@ -2,7 +2,7 @@ import React from "react";
 import useStorage from "./storage";
 
 function ControlItem(props) {
-  const [config, setConfig] = useStorage();
+  const [config, setConfig] = useStorage(props.storage);
 
   function handleNameChange(e) {
     (config[props.id].Name = e.target.value);
@@ -15,7 +15,7 @@ function ControlItem(props) {
   }
 
   console.log("render item " + props.id + " ");
-  //console.log(globalstore);
+  console.log(useStorage.globalstore);
   return (
     <div>
       <input defaultValue={config[props.id].Name} onChange={handleNameChange} />
