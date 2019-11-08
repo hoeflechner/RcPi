@@ -1,6 +1,6 @@
 import React from "react";
 import ControlItem from "./controlitem";
-import useStorage from "./storage";
+import useGlobalState from "./globalState";
 
 const initialState = [
   {
@@ -16,8 +16,8 @@ const initialState = [
 ];
 
 function Config(props) {
-  const [config, setConfig] = useStorage(props.storage, initialState);
-  console.log(config);
+  const [config, setConfig] = useGlobalState(props.storage, initialState);
+  //console.log(config);
   return (
     <div>
       {config.map((c, index) => (

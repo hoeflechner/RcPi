@@ -1,8 +1,8 @@
 import React from "react";
-import useStorage from "./storage";
+import useGlobalState from "./globalState";
 
 function ControlItem(props) {
-  const [config, setConfig] = useStorage(props.storage);
+  const [config, setConfig] = useGlobalState(props.storage);
 
   function handleNameChange(e) {
     config[props.id].Name = e.target.value;
@@ -14,8 +14,8 @@ function ControlItem(props) {
     setConfig(config);
   }
 
-  console.log("render item " + props.id + " ");
-  console.log(config);
+  // console.log("render item " + props.id + " ");
+  // console.log(config);
   return (
     <div>
       <input
