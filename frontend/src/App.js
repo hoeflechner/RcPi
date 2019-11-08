@@ -3,6 +3,8 @@ import Config from "./components/config";
 import ConfigJson from "./components/configjson";
 
 function App() {
+  const [checked, setChecked] = React.useState(false);
+
   function componentDidMount() {
     this.update();
 
@@ -25,10 +27,24 @@ function App() {
 
   console.log("render App ");
 
+  const childElement = checked ? <ConfigJson storage="config" /> : null;
+
   return (
     <React.Fragment>
-      <Config storage='config'/>
-      <ConfigJson storage='config'/>
+      <Config storage="config" />
+      <ConfigJson storage="config" />
+      <section>
+        <label>Display React component?</label>
+        <input
+          id="showChild"
+          type="checkbox"
+          checked={checked}
+          onChange={event => {
+            setChecked(!checked);
+          }}
+        />
+        {childElement}
+      </section>
     </React.Fragment>
   );
 }

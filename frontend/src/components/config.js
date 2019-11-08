@@ -16,14 +16,14 @@ const initialState = [
 ];
 
 function Config(props) {
-  const [config, setConfig] = useStorage(props.storage,initialState);
+  const [config, setConfig] = useStorage(props.storage, initialState);
   console.log(config);
   return (
     <div>
       {config.map((c, index) => (
         <li key={index}>
           Control Item:
-          <ControlItem id={props.id}  storage={props.storage}/>
+          <ControlItem id={index} storage={props.storage} />
         </li>
       ))}
     </div>
