@@ -11,17 +11,13 @@ export default function useGlobalState(identifier, initdata) {
 
   if (!listeners.has(setData)) {
     listeners.add(setData);
-    console.log(listeners.size + " listeners");
+    // console.log(listeners.size + " listeners");
   }
 
-  // console.log("globalstoreage");
-  // console.log(globalstore);
-
   React.useEffect(() => {
-    //console.log("effect");
     return function cleanup() {
       listeners.delete(setData);
-      console.log("cleanup: " + listeners.size + " listeners");
+      //console.log("cleanup: " + listeners.size + " listeners");
     };
   }, []);
 
